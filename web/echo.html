@@ -46,7 +46,7 @@
 		console.log('Closed');
 	  };
 
-	  flvPlayer = mpegts.createPlayer({type: 'flv', url: "https://"+host+":8080/live/livestream.flv", isLive: true, enableStashBuffer: false});
+	  flvPlayer = mpegts.createPlayer({type: 'flv', url: "https://"+host+":8010/live/livestream.flv", isLive: true, enableStashBuffer: false});
 	  flvPlayer.attachMediaElement(document.getElementById('video_player'));
 	  flvPlayer.load();
 	  flvPlayer.play();

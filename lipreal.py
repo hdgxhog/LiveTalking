@@ -243,7 +243,8 @@ class LipReal(BaseReal):
 
             image = combine_frame #(outputs['image'] * 255).astype(np.uint8)
             new_frame = VideoFrame.from_ndarray(image, format="bgr24")
-            asyncio.run_coroutine_threadsafe(video_track._queue.put((new_frame,None)), loop)
+            if video_track:
+                asyncio.run_coroutine_threadsafe(video_track._queue.put((new_frame,None)), loop)
             self.record_video_data(image)
 
             for audio_frame in audio_frames:
