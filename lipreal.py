@@ -245,6 +245,8 @@ class LipReal(BaseReal):
             new_frame = VideoFrame.from_ndarray(image, format="bgr24")
             if video_track:
                 asyncio.run_coroutine_threadsafe(video_track._queue.put((new_frame,None)), loop)
+            else:
+                logger.warning("video_track is None")
             self.record_video_data(image)
 
             for audio_frame in audio_frames:
@@ -255,7 +257,10 @@ class LipReal(BaseReal):
                 new_frame.sample_rate=16000
                 # if audio_track._queue.qsize()>10:
                 #     time.sleep(0.1)
-                asyncio.run_coroutine_threadsafe(audio_track._queue.put((new_frame,eventpoint)), loop)
+                if audio_track:
+                    asyncio.run_coroutine_threadsafe(audio_track._queue.put((new_frame,eventpoint)), loop)
+                else:
+                    logger.warning("audio_track is None")
                 self.record_audio_data(frame)
                 #self.notify(eventpoint)
         logger.info('lipreal process_frames thread stop') 
