@@ -53,8 +53,25 @@ function start() {
 
     pc = new RTCPeerConnection(config);
 
+    pc.addEventListener('icecandidate', (event) => {
+        console.log('Got icecandidate:', event.candidate);
+    });
+    pc.addEventListener('iceconnectionstatechange', (event) => {
+        console.log('iceconnectionstatechange:', event.target.iceConnectionState);
+    });
+    pc.addEventListener('icegatheringstatechange', (e) => {
+        console.log('icegatheringstatechange:', e);
+    });
+    pc.addEventListener('signalingstatechange', (event) => {
+        console.log('signalingstatechange:', event.target.signalingState);
+    });
+    pc.addEventListener('connectionstatechange', (event) => {
+        console.log('connectionstatechange:', event.target.connectionState);
+    });
+
     // connect audio / video
     pc.addEventListener('track', (evt) => {
+        console.log('Got track event:', evt);
         if (evt.track.kind == 'video') {
             document.getElementById('video').srcObject = evt.streams[0];
         } else {
