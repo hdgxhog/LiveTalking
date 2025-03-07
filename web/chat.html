@@ -2,7 +2,7 @@
 <html>
 <head>
   <script type="text/javascript" src="mpegts-1.7.3.min.js"></script>
-  <script type="text/javascript" src="http://cdn.sockjs.org/sockjs-0.3.4.js"></script>
+  <script type="text/javascript" src="https://github.com/sockjs/sockjs-client/releases/download/v0.3.4/sockjs-0.3.4.min.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
 
@@ -46,7 +46,7 @@
 	// 	console.log('Closed');
 	//   };
 
-	  flvPlayer = mpegts.createPlayer({type: 'flv', url: "http://"+host+":8080/live/livestream.flv", isLive: true, enableStashBuffer: false});
+	  flvPlayer = mpegts.createPlayer({type: 'flv', url: "https://"+host+":8080/live/livestream.flv", isLive: true, enableStashBuffer: false});
 	  flvPlayer.attachMediaElement(document.getElementById('video_player'));
 	  flvPlayer.load();
 	  flvPlayer.play();
