@@ -54,7 +54,7 @@ function start() {
     pc = new RTCPeerConnection(config);
 
     pc.addEventListener('icecandidate', (event) => {
-        console.log('Got icecandidate:', event.candidate);
+        console.log('icecandidate:', event.candidate);
     });
     pc.addEventListener('iceconnectionstatechange', (event) => {
         console.log('iceconnectionstatechange:', event.target.iceConnectionState);
@@ -71,7 +71,7 @@ function start() {
 
     // connect audio / video
     pc.addEventListener('track', (evt) => {
-        console.log('Got track event:', evt);
+        console.log('track event:', evt);
         if (evt.track.kind == 'video') {
             document.getElementById('video').srcObject = evt.streams[0];
         } else {
