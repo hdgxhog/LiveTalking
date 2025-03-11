@@ -109,16 +109,16 @@ async def offer(request):
             del nerfreals[sessionid]
 
     @pc.on('signalingstatechange')
-    async def on_signalingstatechange(e):
-        logger.info('signalingstatechange %s', e)
+    async def on_signalingstatechange():
+        logger.info('signalingstatechange %s', pc.signalingState)
 
     @pc.on('iceconnectionstatechange')
-    async def on_iceconnectionstatechange(e):
-        logger.info('iceconnectionstatechange %s', e)
+    async def on_iceconnectionstatechange():
+        logger.info('iceconnectionstatechange %s', pc.iceConnectionState)
 
     @pc.on('icegatheringstatechange')
-    async def on_icegatheringstatechange(e):
-        logger.info('icegatheringstatechange %s', e)
+    async def on_icegatheringstatechange():
+        logger.info('icegatheringstatechange %s', pc.iceGatheringState)
 
     @pc.on('icecandidate')
     async def on_icecandidate(candidate):
@@ -138,6 +138,7 @@ async def offer(request):
 
     answer = await pc.createAnswer()
     await pc.setLocalDescription(answer)
+    logger.info('answer created', {"sdp": pc.localDescription.sdp, "type": pc.localDescription.type, "sessionid":sessionid})
 
     #return jsonify({"sdp": pc.localDescription.sdp, "type": pc.localDescription.type})
 
