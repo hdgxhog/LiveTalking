@@ -108,6 +108,22 @@ async def offer(request):
             pcs.discard(pc)
             del nerfreals[sessionid]
 
+    @pc.on('signalingstatechange')
+    async def on_signalingstatechange(e):
+        logger.info('signalingstatechange %s', e)
+
+    @pc.on('iceconnectionstatechange')
+    async def on_iceconnectionstatechange(e):
+        logger.info('iceconnectionstatechange %s', e)
+
+    @pc.on('icegatheringstatechange')
+    async def on_icegatheringstatechange(e):
+        logger.info('icegatheringstatechange %s', e)
+
+    @pc.on('icecandidate')
+    async def on_icecandidate(candidate):
+        logger.info('on_icecandidate %s', candidate)
+
     player = HumanPlayer(nerfreals[sessionid])
     audio_sender = pc.addTrack(player.audio)
     video_sender = pc.addTrack(player.video)
